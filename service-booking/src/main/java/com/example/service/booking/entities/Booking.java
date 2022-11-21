@@ -6,7 +6,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "Booking")
 public class Booking {
-    private String transactionId;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookingId;
@@ -22,6 +22,8 @@ public class Booking {
     private String roomNumbers;
 
     private int roomPrice;
+
+    private int transactionId;
 
     private  LocalDate bookedOn;
 
@@ -81,11 +83,11 @@ public class Booking {
         this.roomPrice = roomPrice;
     }
 
-    public String getTransactionId() {
+    public int getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(String transactionId) {
+    public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
     }
 
