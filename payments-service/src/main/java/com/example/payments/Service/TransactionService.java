@@ -33,14 +33,16 @@ public class TransactionService {
                 conf.setTrxBooking(trxRepository.save(trx));
                 conf.setBookingDetails(bookingentry);
                 return conf;
+            }else{
+                throw  new RecordNotFoundException("Booking Id :"+trx.getBookingId()+" is not Found");
             }
 
         }catch(Exception e){
-            return conf;
+            throw  new RecordNotFoundException("Booking Id :"+trx.getBookingId()+" is not Found");
         }
 
 
-        return conf;
+
     }
     public Optional<Transaction> getTransactionStatus(int bookingId){
         return  trxRepository.findById(bookingId);

@@ -5,9 +5,11 @@ import com.example.payments.Service.TransactionService;
 import com.example.payments.entities.Transaction;
 
 import com.example.payments.entities.TransactionConfirmation;
-import net.bytebuddy.asm.Advice;
+import com.example.payments.exceptions.RecordNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/payment/")
@@ -19,9 +21,9 @@ public class TransactionController {
     }
 
     @GetMapping("/transaction/{bookingId}")
-    public ResponseEntity getOrder(@PathVariable Integer bookingId){
-
-        return ResponseEntity.ok(trxService.getTransactionStatus(bookingId));
+    public Transaction getOrder(@PathVariable Integer bookingId){
+        Optional<Transaction>response=trxService.getTransactionStatus(bookingId);
+        return response.orElseThrow(()->new RecordNotFoundException("Transaction for the Booking id :"+bookingId+"Not Generated"));
 
     }
 

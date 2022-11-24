@@ -3,6 +3,7 @@ package com.example.service.booking.Controller;
 
 import com.example.service.booking.entities.Booking;
 import com.example.service.booking.entities.Transaction;
+import com.example.service.booking.exceptions.RecordNotFoundException;
 import com.example.service.booking.service.BookingsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,13 +43,10 @@ public class BookingsController {
     }
 
     @GetMapping("/booking/{id}")
-    public ResponseEntity createBooking(@PathVariable Integer id) {
+    public Booking createBooking(@PathVariable Integer id) {
         Optional<Booking> response = bookingsService.getBookingStatus(id);
-        if (response.isPresent()) {
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.of(response);
-        }
+
+        return  response.orElseThrow(()-> new RecordNotFoundException("Booking not generated for the id :"+id));
 
 
     }

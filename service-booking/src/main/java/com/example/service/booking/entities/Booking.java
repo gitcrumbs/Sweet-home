@@ -1,7 +1,6 @@
 package com.example.service.booking.entities;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,6 +10,7 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer bookingId;
+
 
     private String fromDate;
 
