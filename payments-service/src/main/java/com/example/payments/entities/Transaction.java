@@ -1,17 +1,16 @@
-package com.example.paymentsservice.entities;
+package com.example.payments.entities;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Transaction")
 public class Transaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int transactionId;
-    private String paymentMode;
-
  @Column(nullable = false)
  private int bookingId;
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private int transactionId;
+ private String paymentMode;
  private  String upiId;
  private  String cardNumber;
 

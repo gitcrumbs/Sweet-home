@@ -1,30 +1,23 @@
-package com.example.service.booking.entities;
+package com.example.payments.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "Booking")
 public class Booking {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer bookingId;
-
     private String fromDate;
-
     private String toDate;
-
     private String aadharNumber;
 
     private Integer numOfRooms;
-    @Column(nullable = false)
+
     private String roomNumbers;
 
     private int roomPrice;
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private int transactionId;
 
     private  LocalDateTime bookedOn;
