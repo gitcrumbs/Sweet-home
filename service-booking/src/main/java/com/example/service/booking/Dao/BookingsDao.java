@@ -8,4 +8,7 @@ public interface BookingsDao {
     public Booking findbyId(int  bookingId);
     public Booking update(Booking booking);
     public void delete(Booking booking);
+
 }
+
+
