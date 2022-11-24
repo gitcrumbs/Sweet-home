@@ -2,21 +2,18 @@ package com.example.service.booking.service;
 
 import com.example.service.booking.entities.Booking;
 import com.example.service.booking.entities.Transaction;
+import com.example.service.booking.exceptions.RecordNotFoundException;
 import com.example.service.booking.repository.BookingRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import static java.time.temporal.ChronoUnit.DAYS;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class BookingsService {
@@ -46,13 +43,19 @@ public class BookingsService {
         booking.setRoomNumbers(requiredString);
         try{
             booking.setBookedOn(LocalDateTime.now());
-            LocalDateTime date1 = LocalDateTime.parse(booking.getFromDate(), dtf);
-            LocalDateTime date2 = LocalDateTime.parse(booking.getToDate(), dtf);
-            long daysBetween = Duration.between(date1, date2).toDays();
-
-
+            Calendar cl = Calendar. getInstance();
+            Timestamp filterDateFromTs = null,filterDateToTs=null;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date firstDate = dateFormat.parse(booking.getFromDate());
+            Date secondDate = dateFormat.parse(booking.getToDate());
+            long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+            long daysBetween = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
             long roomPrice = 1000 * numOfRooms*(daysBetween);
+            String timeStampFrom =new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format((dateFormat.parse(booking.getFromDate())).getTime());
+            String timeStampTo =new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format((dateFormat.parse(booking.getToDate())).getTime());
+            booking.setFromDate(timeStampFrom);
+            booking.setToDate(timeStampTo);
             booking.setRoomPrice((int)roomPrice);
         }catch(Exception e){
             System.out.println("Inside Exception "+e);
@@ -73,7 +76,7 @@ public class BookingsService {
         RestTemplate restTemplate = new RestTemplate();
         Transaction result = restTemplate.postForObject("http://localhost:8081/payment/transaction", trxVo, Transaction.class);
 
-        Booking responseBooking= bookingRepository.findById(result.getBookingId()).orElse(null);
+        Booking responseBooking= bookingRepository.findById(result.getBookingId()).orElseThrow(()-> new RecordNotFoundException("User with ID :"+id+" Not Found!"));
         responseBooking.setTransactionId(result.getTransactionId());
         responseBooking.setBookedOn(LocalDateTime.now());
 

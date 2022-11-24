@@ -7,12 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
-
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 
 @RestController
 @SpringBootApplication
@@ -36,18 +33,21 @@ public class ServiceBookingApplication {
 		booking.setTransactionId(1234);
 		booking.setRoomPrice(2000);
 
-		System.out.println("Before Saving"+booking);
+		System.out.println("Before Saving" + booking);
 
 		Booking savedCustomer = bookingsDao.save(booking);
 
 		Booking retrivedCustomer = bookingsDao.findbyId(savedCustomer.getBookingId());
-		System.out.println("Retrieved Booking"+retrivedCustomer);
+		System.out.println("Retrieved Booking" + retrivedCustomer);
 
+
+
+
+	}
 
 	@Bean
 	public RestTemplate getRestTemplate(){
 		return new RestTemplate();
 
 	}
-
 }
