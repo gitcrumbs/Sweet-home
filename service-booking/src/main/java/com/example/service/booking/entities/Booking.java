@@ -2,6 +2,7 @@ package com.example.service.booking.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Booking")
@@ -9,45 +10,46 @@ public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int bookingId;
+    private Integer bookingId;
 
-    private LocalDate fromDate;
+    private String fromDate;
 
-    private LocalDate toDate;
+    private String toDate;
 
     private String aadharNumber;
 
-    private int numOfRooms;
+    private Integer numOfRooms;
     @Column(nullable = false)
     private String roomNumbers;
 
     private int roomPrice;
 
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int transactionId;
 
-    private  LocalDate bookedOn;
+    private  LocalDateTime bookedOn;
 
-    public int getBookingId() {
+    public Integer getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
+    public void setBookingId(Integer bookingId) {
         this.bookingId = bookingId;
     }
 
-    public LocalDate getFromDate() {
+    public String getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(LocalDate fromDate) {
+    public void setFromDate(String fromDate) {
         this.fromDate = fromDate;
     }
 
-    public LocalDate getToDate() {
+    public String getToDate() {
         return toDate;
     }
 
-    public void setToDate(LocalDate toDate) {
+    public void setToDate(String toDate) {
         this.toDate = toDate;
     }
 
@@ -91,11 +93,11 @@ public class Booking {
         this.transactionId = transactionId;
     }
 
-    public LocalDate getBookedOn() {
+    public LocalDateTime getBookedOn() {
         return bookedOn;
     }
 
-    public void setBookedOn(LocalDate bookedOn) {
+    public void setBookedOn(LocalDateTime bookedOn) {
         this.bookedOn = bookedOn;
     }
 
