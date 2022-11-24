@@ -64,4 +64,8 @@ public class BookingsDaoImpl implements BookingsDao{
         session.close();
 
     }
+
 }
+
+
+
