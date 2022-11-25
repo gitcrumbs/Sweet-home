@@ -7,11 +7,14 @@ import com.example.payments.entities.Transaction;
 import com.example.payments.entities.TransactionConfirmation;
 import com.example.payments.exceptions.RecordNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@Validated
 @RequestMapping("/payment/")
 public class TransactionController {
 
@@ -28,7 +31,7 @@ public class TransactionController {
     }
 
     @PostMapping("/transaction")
-    public ResponseEntity createTransaction(@RequestBody Transaction trxVo){
+    public ResponseEntity createTransaction(@Valid @RequestBody Transaction trxVo){
 
         TransactionConfirmation created = trxService.createTransaction(trxVo);
 
