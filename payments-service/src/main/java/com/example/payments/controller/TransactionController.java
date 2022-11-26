@@ -6,6 +6,10 @@ import com.example.payments.entities.Transaction;
 
 import com.example.payments.entities.TransactionConfirmation;
 import com.example.payments.exceptions.RecordNotFoundException;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +21,7 @@ import java.util.Optional;
 @Validated
 @RequestMapping("/payment/")
 public class TransactionController {
-
+    Logger logger = LoggerFactory.getLogger(TransactionController.class);
     TransactionService trxService;
     public  TransactionController(TransactionService trxService){
         this.trxService=trxService;
@@ -41,6 +45,8 @@ public class TransactionController {
                 + created.getBookingDetails().getAadharNumber()
                 +    "    |    "
                 + "Here are the booking details:    "+ created.getBookingDetails().toString());
+
+        logger.info(created.getMessage());
 
         return ResponseEntity.ok(created.getBookingDetails());
 
