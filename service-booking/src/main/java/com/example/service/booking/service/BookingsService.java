@@ -5,6 +5,7 @@ import com.example.service.booking.entities.Transaction;
 import com.example.service.booking.exceptions.RecordNotFoundException;
 import com.example.service.booking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +18,8 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class BookingsService {
+
+
 
     @Autowired
     private RestTemplate restTemplate ;
@@ -74,7 +77,7 @@ public class BookingsService {
         //
         trxVo.setBookingId(id);
         RestTemplate restTemplate = new RestTemplate();
-        Transaction result = restTemplate.postForObject("http://localhost:8081/payment/transaction", trxVo, Transaction.class);
+        Transaction result = restTemplate.postForObject(transactionAppUrl, trxVo, Transaction.class);
 
         Booking responseBooking= bookingRepository.findById(result.getBookingId()).orElseThrow(()-> new RecordNotFoundException("User with ID :"+id+" Not Found!"));
         responseBooking.setTransactionId(result.getTransactionId());
