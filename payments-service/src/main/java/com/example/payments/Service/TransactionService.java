@@ -6,6 +6,7 @@ import com.example.payments.entities.Booking;
 import com.example.payments.entities.Transaction;
 import com.example.payments.entities.TransactionConfirmation;
 import com.example.payments.exceptions.RecordNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +16,8 @@ import java.util.Optional;
 @Service
 public class TransactionService {
 
+    @Value("${bookingApp.url}")
+    private String bookingAppurl;
     private TransactionRepository trxRepository;
     public TransactionService(TransactionRepository trxRepository){
         this.trxRepository=trxRepository;
@@ -26,7 +29,7 @@ public class TransactionService {
         TransactionConfirmation conf = new TransactionConfirmation();
         try{
             RestTemplate restTemplate = new RestTemplate();
-            bookingentry = restTemplate.getForObject("http://localhost:8080/hotel/booking/"+trx.getBookingId(),  Booking.class);
+            bookingentry = restTemplate.getForObject(bookingAppurl+trx.getBookingId(),  Booking.class);
 
 
             if(bookingentry.getBookingId()!=null){                               ;
