@@ -1,11 +1,7 @@
 package com.example.service.booking.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.*;
-
+import javax.validation.constraints.NotBlank;
 
 
 public class Transaction {
@@ -13,6 +9,8 @@ public class Transaction {
     private int transactionId;
     private String paymentMode;
     private String upiId;
+
+    @NotBlank(message = "Invalid mode of payment")
     private String cardNumber;
 
     public int getTransactionId() {

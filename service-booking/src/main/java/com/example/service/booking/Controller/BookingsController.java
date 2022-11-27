@@ -7,11 +7,14 @@ import com.example.service.booking.exceptions.RecordNotFoundException;
 import com.example.service.booking.service.BookingsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@Validated
 @RequestMapping("/hotel")
 public class BookingsController {
 
@@ -36,9 +39,16 @@ public class BookingsController {
     }
 
     @PostMapping("/booking/{id}/transaction")
-    public ResponseEntity getBookingStatus(@RequestBody Transaction trxVo, @PathVariable Integer id) {
+    public ResponseEntity getBookingStatus(@Valid @RequestBody Transaction trxVo, @PathVariable Integer id) {
         System.out.println("Inside Booking Transaction status " + trxVo);
-        return ResponseEntity.ok(bookingsService.createTrx(trxVo, id));
+
+        Booking bookingentry = bookingsService.getBookingStatus(id).orElseThrow(() -> new RecordNotFoundException("Booking not found for the given id "+id));
+        Booking bookingentryservice = new  Booking();
+        if(bookingentry.getBookingId()!=null){
+            System.out.println("Booking id found "+bookingentry.getBookingId() );
+            bookingentryservice =  bookingsService.createTrx(trxVo, id,bookingentry);
+        }
+        return ResponseEntity.ok(bookingentryservice);
 
     }
 
