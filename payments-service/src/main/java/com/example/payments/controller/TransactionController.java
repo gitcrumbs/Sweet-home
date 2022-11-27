@@ -4,12 +4,12 @@ package com.example.payments.controller;
 import com.example.payments.Service.TransactionService;
 import com.example.payments.entities.Transaction;
 
-import com.example.payments.entities.TransactionConfirmation;
 import com.example.payments.exceptions.RecordNotFoundException;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -27,28 +27,19 @@ public class TransactionController {
         this.trxService=trxService;
     }
 
-    @GetMapping("/transaction/{bookingId}")
-    public Transaction getOrder(@PathVariable Integer bookingId){
-        Optional<Transaction>response=trxService.getTransactionStatus(bookingId);
-        return response.orElseThrow(()->new RecordNotFoundException("Transaction for the Booking id :"+bookingId+"Not Generated"));
+    @GetMapping("/transaction/{transactionId}")
+    public Transaction getOrder(@PathVariable Integer transactionId){
+        Optional<Transaction>response=trxService.getTransactionStatus(transactionId);
+        return response.orElseThrow(()->new RecordNotFoundException("No Transaction Information found for :"+transactionId));
 
     }
 
     @PostMapping("/transaction")
-    public ResponseEntity createTransaction(@Valid @RequestBody Transaction trxVo){
+    public ResponseEntity<Integer> createTransaction(@Valid @RequestBody Transaction trxVo){
 
-        TransactionConfirmation created = trxService.createTransaction(trxVo);
+        Integer created = trxService.createTransaction(trxVo);
+        return new ResponseEntity<>(created, HttpStatus.CREATED);
 
-        created.getBookingDetails().setTransactionId(created.getTrxBooking().getTransactionId());
-
-        created.setMessage("Booking confirmed for user with aadhaar number: "
-                + created.getBookingDetails().getAadharNumber()
-                +    "    |    "
-                + "Here are the booking details:    "+ created.getBookingDetails().toString());
-
-        logger.info(created.getMessage());
-
-        return ResponseEntity.ok(created.getBookingDetails());
 
     }
 }

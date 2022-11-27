@@ -2,7 +2,6 @@ package com.example.service.booking.service;
 
 import com.example.service.booking.entities.Booking;
 import com.example.service.booking.entities.Transaction;
-import com.example.service.booking.exceptions.RecordNotFoundException;
 import com.example.service.booking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +18,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class BookingsService {
 
-
+    @Value("${transactionApp.url}")
+    private String transactionAppUrl;
 
     @Autowired
     private RestTemplate restTemplate ;
@@ -73,30 +73,16 @@ public class BookingsService {
         return bookedItem;
     }
 
-    public Booking createTrx(Transaction trxVo, Integer id){
-        //
+    public Booking createTrx(Transaction trxVo, Integer id, Booking bookingentry){        //
         trxVo.setBookingId(id);
-        RestTemplate restTemplate = new RestTemplate();
-        Transaction result = restTemplate.postForObject(transactionAppUrl, trxVo, Transaction.class);
 
-        Booking responseBooking= bookingRepository.findById(result.getBookingId()).orElseThrow(()-> new RecordNotFoundException("User with ID :"+id+" Not Found!"));
-        responseBooking.setTransactionId(result.getTransactionId());
-        responseBooking.setBookedOn(LocalDateTime.now());
+        Integer item= restTemplate.postForObject(transactionAppUrl, trxVo, Integer.class);
+        System.out.println("Generated Transaction id is"+item);
+        bookingentry.setTransactionId(item);
 
-        Calendar cl = Calendar. getInstance();
-        Timestamp filterDateFromTs = null,filterDateToTs=null;
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            filterDateFromTs = new Timestamp ((dateFormat.parse(responseBooking.getFromDate())).getTime());
-            filterDateToTs = new Timestamp ((dateFormat.parse(responseBooking.getToDate())).getTime());
+        bookingRepository.save(bookingentry);
 
-        } catch (Exception e) {
-            System.out.println("Parse Error "+e);
-        }
-        responseBooking.setFromDate(filterDateFromTs.toString());
-        responseBooking.setToDate(filterDateToTs.toString());
-
-        return responseBooking;
+        return bookingentry;
     }
 
     public List<Booking> getAllBookings(){
