@@ -21,7 +21,7 @@ import java.util.Optional;
 @Validated
 @RequestMapping("/payment/")
 public class TransactionController {
-    Logger logger = LoggerFactory.getLogger(TransactionController.class);
+
     TransactionService trxService;
     public  TransactionController(TransactionService trxService){
         this.trxService=trxService;
