@@ -1,7 +1,11 @@
 package com.example.service.booking.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "Booking")
@@ -11,10 +15,12 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer bookingId;
 
-
-    private String fromDate;
-
-    private String toDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Please provide a From date.")
+    private Date fromDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Please provide a To date.")
+    private Date toDate;
 
     private String aadharNumber;
 
@@ -37,19 +43,19 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    public String getFromDate() {
+    public Date getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(String fromDate) {
+    public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
     }
 
-    public String getToDate() {
+    public Date getToDate() {
         return toDate;
     }
 
-    public void setToDate(String toDate) {
+    public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
 

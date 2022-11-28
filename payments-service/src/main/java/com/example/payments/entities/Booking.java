@@ -1,14 +1,23 @@
 package com.example.payments.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 public class Booking {
 
     private Integer bookingId;
-    private String fromDate;
-    private String toDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Please provide a From date.")
+    private Date fromDate;
+
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Please provide a To date.")
+    private Date toDate;
     private String aadharNumber;
 
     private Integer numOfRooms;
@@ -20,7 +29,7 @@ public class Booking {
 
     private int transactionId;
 
-    private  LocalDateTime bookedOn;
+    private  Date bookedOn;
 
     public Integer getBookingId() {
         return bookingId;
@@ -30,19 +39,19 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    public String getFromDate() {
+    public Date getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(String fromDate) {
+    public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
     }
 
-    public String getToDate() {
+    public Date getToDate() {
         return toDate;
     }
 
-    public void setToDate(String toDate) {
+    public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
 
@@ -86,11 +95,11 @@ public class Booking {
         this.transactionId = transactionId;
     }
 
-    public LocalDateTime getBookedOn() {
+    public Date getBookedOn() {
         return bookedOn;
     }
 
-    public void setBookedOn(LocalDateTime bookedOn) {
+    public void setBookedOn(Date bookedOn) {
         this.bookedOn = bookedOn;
     }
 

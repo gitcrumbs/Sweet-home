@@ -20,7 +20,7 @@ public class LoggingAspect {
 
         logger.info("In "+className+" entering "+methodName);
         Object result= joinPoint.proceed();
-        logger.info("In "+className+" existing "+methodName);
+        logger.info("In "+className+" exiting "+methodName);
 
 
         return  result;

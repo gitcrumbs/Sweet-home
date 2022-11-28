@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -90,18 +89,17 @@ public class BookingsService {
             booking.setBookedOn(LocalDateTime.now());
             Calendar cl = Calendar. getInstance();
             Timestamp filterDateFromTs = null,filterDateToTs=null;
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date firstDate = dateFormat.parse(booking.getFromDate());
-            Date secondDate = dateFormat.parse(booking.getToDate());
+
+            Date firstDate = booking.getFromDate();
+            Date secondDate = booking.getToDate();
             long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
             long daysBetween = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
             long roomPrice = 1000 * numOfRooms*(daysBetween);
-            String timeStampFrom =new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format((dateFormat.parse(booking.getFromDate())).getTime());
-            String timeStampTo =new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format((dateFormat.parse(booking.getToDate())).getTime());
-            booking.setFromDate(timeStampFrom);
-            booking.setToDate(timeStampTo);
+            booking.setFromDate(booking.getFromDate());
+            booking.setToDate(booking.getToDate());
             booking.setRoomPrice((int)roomPrice);
+
         }catch(Exception e){
             throw new Exception("Unable to create Transaction"+e.getMessage());
         }
