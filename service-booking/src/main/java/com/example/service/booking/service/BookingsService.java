@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -79,29 +77,28 @@ public class BookingsService {
    /* This code block formats the data as per the given format in
     the problem statement*/
     public Booking formatDataEntry(Booking booking)throws  Exception{
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
         int numOfRooms = booking.getNumOfRooms();
         String s= getRandomNumbers(numOfRooms).toString();
         String requiredString = s.substring(s.indexOf("[")+1 , s.indexOf("]"));
         booking.setRoomNumbers(requiredString);
         try{
-            booking.setBookedOn(LocalDateTime.now());
-            Calendar cl = Calendar. getInstance();
-            Timestamp filterDateFromTs = null,filterDateToTs=null;
+            //Setting the booking date to current date
+            System.out.println("The LocalDateTime format is : "+LocalDateTime.now());
+            booking.setBookedOn(java.sql.Timestamp.valueOf(LocalDateTime.now()));
 
+            //Calculate differences between date and calculate the room price
             Date firstDate = booking.getFromDate();
             Date secondDate = booking.getToDate();
             long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
             long daysBetween = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-
             long roomPrice = 1000 * numOfRooms*(daysBetween);
+
             booking.setFromDate(booking.getFromDate());
             booking.setToDate(booking.getToDate());
             booking.setRoomPrice((int)roomPrice);
 
         }catch(Exception e){
-            throw new Exception("Unable to create Transaction"+e.getMessage());
+            throw new Exception("Exception in Data Manipulations"+e.getMessage());
         }
 
         return booking;

@@ -1,13 +1,9 @@
 package com.example.payments.entities;
 
-
-
-
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
 @Entity
 @Table(name = "Transaction")
 public class Transaction {
@@ -18,10 +14,8 @@ public class Transaction {
     private int transactionId;
     private String paymentMode;
     private  String upiId;
-
     @NotBlank(message = "Invalid mode of payment")
     private  String cardNumber;
-
     public int getTransactionId() {
         return transactionId;
     }

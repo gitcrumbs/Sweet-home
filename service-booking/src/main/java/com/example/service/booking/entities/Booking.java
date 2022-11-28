@@ -4,37 +4,28 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "Booking")
 public class Booking {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer bookingId;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Please provide a From date.")
     private Date fromDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Please provide a To date.")
     private Date toDate;
-
     private String aadharNumber;
-
     private Integer numOfRooms;
     @Column(nullable = false)
     private String roomNumbers;
-
     private int roomPrice;
-
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int transactionId;
-
-    private  LocalDateTime bookedOn;
-
+    private  Date bookedOn;
     public Integer getBookingId() {
         return bookingId;
     }
@@ -99,11 +90,11 @@ public class Booking {
         this.transactionId = transactionId;
     }
 
-    public LocalDateTime getBookedOn() {
+    public Date getBookedOn() {
         return bookedOn;
     }
 
-    public void setBookedOn(LocalDateTime bookedOn) {
+    public void setBookedOn(Date bookedOn) {
         this.bookedOn = bookedOn;
     }
 
