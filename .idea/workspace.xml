@@ -37,7 +37,7 @@
     &quot;last_opened_file_path&quot;: &quot;D:/Upgrad_Projects/Pulled_Proj/Sweet-home&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.ServiceBookingApplication">
+  <component name="RunManager" selected="Application.ApiGatewayApplication">
     <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.apiGateway.ApiGatewayApplication" />
       <module name="apiGateway" />
@@ -92,9 +92,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServiceBookingApplication" />
-        <item itemvalue="Application.PaymentsServiceApplication" />
         <item itemvalue="Application.ApiGatewayApplication" />
+        <item itemvalue="Application.PaymentsServiceApplication" />
+        <item itemvalue="Application.ServiceBookingApplication" />
         <item itemvalue="Application.ServiceRegisteryApplication" />
       </list>
     </recent_temporary>
