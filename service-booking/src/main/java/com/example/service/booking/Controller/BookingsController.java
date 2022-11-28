@@ -55,7 +55,7 @@ public class BookingsController {
     public ResponseEntity getBookingStatus(@Valid @RequestBody Transaction trxVo, @PathVariable Integer id) {
 
         Booking bookingEntry = bookingsService.getBookingStatus(id).orElseThrow(() -> new BookingNotFoundException("Booking not found for the given id "+id));
-
+        System.out.println("Booking status is "+bookingEntry.toString());
         if(bookingEntry.getBookingId()!=null){
             System.out.println("Booking id found "+bookingEntry.getBookingId() );
             bookingEntry =  bookingsService.createTrx(trxVo, id,bookingEntry);

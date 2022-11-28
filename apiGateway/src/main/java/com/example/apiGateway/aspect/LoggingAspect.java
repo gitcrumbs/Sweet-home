@@ -18,7 +18,7 @@ public class LoggingAspect {
 
         System.out.println("In "+className+" entering "+methodName);
         Object result= joinPoint.proceed();
-        System.out.println("In "+className+" existing "+methodName);
+        System.out.println("In "+className+" exiting "+methodName);
 
         return  result;
     }
