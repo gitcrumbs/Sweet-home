@@ -39,7 +39,7 @@ public class BookingsController {
       generates the booking entry in the database .
      * */
     @PostMapping("/booking")
-    public ResponseEntity<Booking> createBooking(@RequestBody Booking trxVo) throws Exception {
+    public ResponseEntity<Booking> createBooking(@Valid @RequestBody Booking trxVo) throws Exception {
 
         return new ResponseEntity<>(bookingsService.createBooking(trxVo), HttpStatus.CREATED);
 
