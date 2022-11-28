@@ -30,13 +30,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Upgrad_Projects/Pulled_Proj/Sweet-home"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Upgrad_Projects/Pulled_Proj/Sweet-home&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.ServiceBookingApplication">
     <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.apiGateway.ApiGatewayApplication" />
@@ -93,9 +93,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ServiceBookingApplication" />
-        <item itemvalue="Application.ServiceRegisteryApplication" />
         <item itemvalue="Application.PaymentsServiceApplication" />
         <item itemvalue="Application.ApiGatewayApplication" />
+        <item itemvalue="Application.ServiceRegisteryApplication" />
       </list>
     </recent_temporary>
   </component>
