@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1c7e3c59-a21f-4079-afa6-08ddebd8ac0d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payments-service/payments-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-service/payments-service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payments-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-booking/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service-booking/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +16,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -37,7 +45,7 @@
     &quot;last_opened_file_path&quot;: &quot;D:/Upgrad_Projects/Pulled_Proj/Sweet-home&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.ApiGatewayApplication">
+  <component name="RunManager" selected="Application.PaymentsServiceApplication">
     <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.apiGateway.ApiGatewayApplication" />
       <module name="apiGateway" />
@@ -92,9 +100,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.PaymentsServiceApplication" />
         <item itemvalue="Application.ServiceBookingApplication" />
+        <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.ServiceRegisteryApplication" />
       </list>
     </recent_temporary>
