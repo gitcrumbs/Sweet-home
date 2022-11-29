@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "7c7e9a00-a027-4e3d-b4f5-5bae6fd8dd4e",
+		"name": "sweet-home-booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1_booking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fromDate\": \"2022-11-26\",\r\n    \"toDate\": \"2022-11-29\",\r\n    \"aadharNumber\": \"122334252\",\r\n    \"numOfRooms\": 2       \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9191/hotel/booking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"hotel",
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2_booking_Transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentMode\": \"CARD\",\r\n    \"bookingId\": 1,\r\n    \"upiId\": \"upi details\",\r\n    \"cardNumber\": \"12341324\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9191/hotel/booking/1/transaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"hotel",
+						"booking",
+						"1",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3_PaymentTransaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentMode\": \"UPI\",\r\n    \"bookingId\": 2,\r\n    \"upiId\": \"upi details for bookingId 2 direct endpoint\",\r\n    \"cardNumber\": \"2134323\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9191/payment/transaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"payment",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4_getPaymentTransaction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9191/payment/transaction/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"payment",
+						"transaction",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
